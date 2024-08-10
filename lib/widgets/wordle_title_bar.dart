@@ -11,7 +11,7 @@ class WordleTitleBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          WordAttempsToggle(),
+          WordAttemptsToggle(),
           Text(
             "WORDLE",
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -24,31 +24,26 @@ class WordleTitleBar extends StatelessWidget {
 }
 
 class WordSizeToggle extends ConsumerWidget {
-  const WordSizeToggle({Key? key}) : super(key: key);
+  const WordSizeToggle({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final GameSettings = ref.watch(GameSettingsProvider);
-    final GameSettingsNotifier = ref.read(GameSettingsProvider.notifier);
+    final gameSettings = ref.watch(gameSettingsProvider);
+    final gameSettingsNotifier = ref.read(gameSettingsProvider.notifier);
 
     void _updateWordSize() {
       var newWordSize = 5;
-      if (GameSettings.wordsize == 4) {
-        newWordSize = 5;
-      }
-      if (GameSettings.wordsize == 5) {
-        newWordSize = 6;
-      }
-      if (GameSettings.wordsize == 6) {
-        newWordSize = 4;
-      }
-
-      GameSettingsNotifier.updateWordsize(newWordSize);
+      if (gameSettings.wordsize == 4) newWordSize = 5;
+      if (gameSettings.wordsize == 5) newWordSize = 6;
+      if (gameSettings.wordsize == 6) newWordSize = 4;
+      gameSettingsNotifier.updateWordsize(newWordSize);
     }
 
     return Container(
       child: OutlinedButton(
-        child: Text(GameSettings.wordsize.toString()),
+        child: Text(gameSettings.wordsize.toString()),
         onPressed: _updateWordSize,
       ),
       margin: EdgeInsets.fromLTRB(40, 0, 0, 0),
@@ -56,31 +51,26 @@ class WordSizeToggle extends ConsumerWidget {
   }
 }
 
-class WordAttempsToggle extends ConsumerWidget {
-  const WordAttempsToggle({Key? key}) : super(key: key);
+class WordAttemptsToggle extends ConsumerWidget {
+  const WordAttemptsToggle({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final GameSettings = ref.watch(GameSettingsProvider);
-    final GameSettingsNotifier = ref.read(GameSettingsProvider.notifier);
+    final gameSettings = ref.watch(gameSettingsProvider);
+    final gameSettingsNotifier = ref.read(gameSettingsProvider.notifier);
 
-    void _updateAttemps() {
-      var newAttemps = 6;
-      if (GameSettings.attemps == 4) {
-        newAttemps = 5;
-      }
-      if (GameSettings.attemps == 5) {
-        newAttemps = 6;
-      }
-      if (GameSettings.attemps == 6) {
-        newAttemps = 4;
-      }
-
-      GameSettingsNotifier.updateAttemps(newAttemps);
+    void _updateAttempts() {
+      var newAttempts = 6;
+      if (gameSettings.attempts == 4) newAttempts = 5;
+      if (gameSettings.attempts == 5) newAttempts = 6;
+      if (gameSettings.attempts == 6) newAttempts = 4;
+      gameSettingsNotifier.updateAttempts(newAttempts);
     }
 
     String text;
-    switch (GameSettings.attemps) {
+    switch (gameSettings.attempts) {
       case 4:
         text = "HIGH";
         break;
@@ -92,10 +82,11 @@ class WordAttempsToggle extends ConsumerWidget {
         text = "LOW";
         break;
     }
+
     return Container(
       child: OutlinedButton(
         child: Text(text),
-        onPressed: _updateAttemps,
+        onPressed: _updateAttempts,
       ),
       margin: EdgeInsets.fromLTRB(0, 0, 40, 0),
     );

@@ -3,19 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wordle/widgets/wordle_page.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  const providerScopedApp = ProviderScope(child: MyApp());
+  FlutterError.onError = (FlutterErrorDetails details) {};
+  runApp(providerScopedApp);
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
       home: const WordlePage(),
     );

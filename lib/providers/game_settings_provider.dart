@@ -2,23 +2,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GameSettings {
   final int wordsize;
-  final int attemps;
+  final int attempts;
 
-  GameSettings({required this.wordsize, required this.attemps});
+  GameSettings({required this.wordsize, required this.attempts});
 
-  GameSettings clone({int? wordsize, int? attemps}) {
+  GameSettings clone({int? wordsize, int? attempts}) {
     return GameSettings(
-      attemps: attemps ?? this.attemps,
-      wordsize: wordsize ?? this.wordsize,
-    );
+        attempts: attempts ?? this.attempts,
+        wordsize: wordsize ?? this.wordsize);
   }
 }
 
 class GameSettingsNotifier extends StateNotifier<GameSettings> {
-  GameSettingsNotifier() : super(GameSettings(wordsize: 5, attemps: 6));
+  GameSettingsNotifier() : super(GameSettings(wordsize: 5, attempts: 6));
 
-  void updateAttemps(int attemps) {
-    state = state.clone(attemps: attemps);
+  void updateAttempts(int attempts) {
+    state = state.clone(attempts: attempts);
   }
 
   void updateWordsize(int wordsize) {
@@ -26,7 +25,7 @@ class GameSettingsNotifier extends StateNotifier<GameSettings> {
   }
 }
 
-final GameSettingsProvider =
+final gameSettingsProvider =
     StateNotifierProvider<GameSettingsNotifier, GameSettings>((ref) {
   return GameSettingsNotifier();
 });

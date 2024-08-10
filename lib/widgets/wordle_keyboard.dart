@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:wordle/widgets/wordle_key.dart';
 
 class WordleKeyboard extends StatelessWidget {
@@ -12,14 +10,17 @@ class WordleKeyboard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [for (var i in "QWERTYUIOP".split("")) WordleKey(i)]),
+          mainAxisSize: MainAxisSize.min,
+          children: [for (var i in "qwertyuiop".split("")) WordleKey(i)],
+        ),
         Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [for (var i in "ASDFGHJKL".split("")) WordleKey(i)]),
+          mainAxisSize: MainAxisSize.min,
+          children: [for (var i in "asdfghjkl".split("")) WordleKey(i)],
+        ),
         Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [for (var i in "_ZXCVBNM<".split("")) WordleKey(i)]),
+          mainAxisSize: MainAxisSize.min,
+          children: [for (var i in "_zxcvbnm<".split("")) WordleKey(i)],
+        ),
       ],
     );
   }
